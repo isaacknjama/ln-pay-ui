@@ -1,3 +1,4 @@
+import { Center, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
 export const Receive = () => {
@@ -6,15 +7,12 @@ export const Receive = () => {
   useEffect(() => {
     const fetchInvoice = async () => {
       try {
-        const response = await fetch(
-          'http://localhost:3001/pay-invoice',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+        const response = await fetch('http://localhost:3001/pay-invoice', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+        });
         if (!response) {
           throw new Error('Network response was not ok');
         }
@@ -31,12 +29,18 @@ export const Receive = () => {
   }, []);
 
   if (!invoice) {
-    return <p>Loading...</p>;
+    return (
+      <Center>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Center>
+    );
   }
 
-  return (
-    <div>
-
-    </div>
-  );
+  return <div></div>;
 };

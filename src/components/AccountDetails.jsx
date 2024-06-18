@@ -1,3 +1,11 @@
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Center,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 
 export const AccountDetails = () => {
@@ -24,16 +32,37 @@ export const AccountDetails = () => {
   }, []);
 
   if (!accountDetails) {
-    return <p>Loading...</p>;
+    return (
+      <Center>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Center>
+    );
   }
 
   return (
-    <div>
-      <h2>Account Details</h2>
-      <p>Account ID: {accountDetails.id}</p>
-      <p>User ID: {accountDetails.userId}</p>
-      <p>Account Name: {accountDetails.name}</p>
-      <p>Balance: {accountDetails.balance}</p>
-    </div>
+    <Card w='70%' margin='auto' top={8}>
+      <CardHeader>
+        <Text
+          as='h1'
+          fontWeight='bold'
+          textAlign='center'
+          textDecoration='underline'
+        >
+          Account details
+        </Text>
+      </CardHeader>
+      <CardBody>
+        <Text fontWeight='bold'>Account ID: {accountDetails.id}</Text>
+        <Text fontWeight='bold'>User ID: {accountDetails.userId}</Text>
+        <Text fontWeight='bold'>Account Name: {accountDetails.name}</Text>
+        <Text fontWeight='bold'>Balance: {accountDetails.balance}</Text>
+      </CardBody>
+    </Card>
   );
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
+import { Box, Center, Spinner } from '@chakra-ui/react';
 
 export const CreateInvoice = () => {
   const [invoice, setInvoice] = useState();
@@ -32,14 +33,24 @@ export const CreateInvoice = () => {
   }, []);
 
   if (!invoice) {
-    return <p>Loading...</p>;
+    return (
+      <Center>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Center>
+    );
   }
 
   return (
-    <div>
-      <div style={{ justifyContent: 'center', alignContent: 'center' }}>
-        <QRCode value={invoice.bolt11} size={256} />
-      </div>
-    </div>
+    <Center mt={16}>
+      <Box>
+        <QRCode value={invoice.bolt11} size={240} />
+      </Box>
+    </Center>
   );
 };
